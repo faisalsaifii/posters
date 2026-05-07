@@ -1,65 +1,122 @@
 import Image from "next/image";
+import PosterCard from "@/components/PosterCard";
+import { posters, categories } from "@/lib/posters";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div>
+      <section className="container pt-16 md:pt-24 pb-16 grid md:grid-cols-12 gap-10 items-center">
+        <div className="md:col-span-6 space-y-8 animate-fade-in-left">
+          <p className="hand text-4xl text-accent animate-wiggle inline-block origin-bottom-left">
+            cool prints,
+          </p>
+          <h1 className="display text-6xl md:text-8xl text-ink">
+            <span className="shimmer">posters</span>
+            <br />
+            for your
+            <br />
+            <span className="editorial glow-text">walls.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="font-sans text-base text-ink-soft max-w-md leading-relaxed">
+            Affordable, good-looking poster prints. Pick one, throw it on the
+            wall, vibe immediately. Shipped rolled, ready to hang.
+          </p>
+          <div className="flex flex-wrap gap-4 pt-2">
+            <Link href="/categories" className="ink-btn">
+              Shop posters
+            </Link>
+            <Link href="#shop" className="ghost-btn">
+              See what&apos;s new
+            </Link>
+          </div>
+        </div>
+        <div className="md:col-span-6 animate-fade-in-right">
+          <div className="sketch-border p-4 rotate-[1.5deg] animate-float">
+            <Image
+              src="/hero"
+              alt="Featured poster"
+              width={1280}
+              height={896}
+              className="w-full h-auto mix-blend-screen invert"
+            />
+          </div>
+          <p className="hand text-2xl text-pencil text-right mt-3 pr-4">
+            — this week&apos;s pick
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="border-y border-ink/30 bg-paper-deep/50 py-4 overflow-hidden">
+        <div className="flex w-max animate-marquee gap-12 font-sans text-xs uppercase tracking-[0.3em] text-ink-soft whitespace-nowrap">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="flex gap-12 pr-12">
+              <span>↳ Free shipping over $40</span>
+              <span>· Thick matte paper</span>
+              <span>· Ships in 2 days</span>
+              <span>· Multiple sizes</span>
+              <span>· New drops weekly</span>
+              <span>· Printed in Brooklyn</span>
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
+
+      <section id="shop" className="container py-20">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <p className="hand text-3xl text-accent">fresh drops</p>
+            <h2 className="display text-4xl md:text-5xl text-ink">
+              New this week
+            </h2>
+          </div>
+          <Link
+            href="/categories"
+            className="font-sans text-xs uppercase tracking-widest sketch-underline hidden md:inline"
+          >
+            View all →
+          </Link>
+        </div>
+        <Carousel opts={{ align: "start", loop: true }} className="px-2">
+          <CarouselContent className="-ml-6">
+            {posters.map((p) => (
+              <CarouselItem
+                key={p.id}
+                className="pl-6 sm:basis-1/2 md:basis-1/3"
+              >
+                <PosterCard poster={p} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex -left-6 h-10 w-10 border-ink/40 text-ink hover:bg-ink hover:text-paper" />
+          <CarouselNext className="hidden md:flex -right-6 h-10 w-10 border-ink/40 text-ink hover:bg-ink hover:text-paper" />
+        </Carousel>
+      </section>
+
+      <section className="container pb-24">
+        <h2 className="display text-3xl md:text-4xl text-ink mb-8">
+          Browse by vibe
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 stagger">
+          {categories.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/categories?c=${c.slug}`}
+              className="sketch-border p-6 block hover-lift"
+            >
+              <h3 className="display text-2xl text-ink">{c.name}</h3>
+              <p className="hand text-lg text-pencil mt-1">{c.note}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
