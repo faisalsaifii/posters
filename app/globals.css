@@ -56,6 +56,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-marquee: marquee 28s linear infinite;
 }
 
 :root {
@@ -105,6 +106,15 @@
   --sidebar-accent-foreground: 240 5.9% 10%;
   --sidebar-border: 220 13% 91%;
   --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @layer utilities {
@@ -186,38 +196,203 @@
   .serif {
     font-family: var(--font-bricolage), sans-serif;
   }
+  .ghost-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1.5px solid hsl(var(--ink));
+    background: transparent;
+    color: hsl(var(--ink));
+    transition: all 0.2s ease;
+  }
+  .ghost-btn:hover {
+    box-shadow: 4px 4px 0 hsl(var(--accent)), 0 0 25px hsl(var(--accent) / 0.3);
+    transform: translate(-2px, -2px);
+    border-color: hsl(var(--accent));
+    color: hsl(var(--accent));
+  }
 }
 
 @layer components {
+  .display {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 96;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+  .editorial {
+    font-family: "Caveat", cursive;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
   .sketch-border {
-    border: 1.5px solid hsl(var(--ink) / 0.25);
-    border-radius: 2px;
-    box-shadow: 2px 2px 0 hsl(var(--ink) / 0.08),
-      -1px -1px 0 hsl(var(--ink) / 0.04);
+    border: 1.5px solid hsl(var(--ink));
+    box-shadow: 4px 4px 0 hsl(var(--ink));
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: hsl(var(--paper));
+  }
+  .sketch-border:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 hsl(var(--accent)), 0 0 30px hsl(var(--accent) / 0.25);
   }
   .sketch-underline {
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1.5px;
-    text-decoration-color: hsl(var(--accent));
+    background-image: linear-gradient(hsl(var(--ink)), hsl(var(--ink)));
+    background-size: 100% 1.5px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    padding-bottom: 2px;
+  }
+  .hand {
+    font-family: "Caveat", cursive;
   }
   .ink-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.5rem;
-    border: 1.5px solid hsl(var(--ink) / 0.5);
-    border-radius: 2px;
-    font-family: var(--font-inter), sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: hsl(var(--ink));
-    transition: background-color 0.15s, color 0.15s;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-sans text-sm uppercase tracking-widest;
+    border: 1.5px solid hsl(var(--ink));
+    background: hsl(var(--ink));
+    color: hsl(var(--paper));
+    transition: all 0.2s ease;
   }
   .ink-btn:hover {
-    background-color: hsl(var(--ink));
-    color: hsl(var(--background));
+    background: hsl(var(--paper));
+    color: hsl(var(--ink));
+    box-shadow: 4px 4px 0 hsl(var(--ink));
+    transform: translate(-2px, -2px);
+  }
+  .ink-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  .ink-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      hsl(var(--accent) / 0.6) 50%,
+      transparent 70%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+  }
+  .ink-btn:hover::after {
+    transform: translateX(120%);
+  }
+
+  .hover-lift {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.35s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-8px) rotate(-0.6deg) scale(1.01);
+  }
+  .glow-text {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--neon)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 24px hsl(var(--accent) / 0.45));
+  }
+  .glow-ring {
+    box-shadow: 0 0 0 1px hsl(var(--accent) / 0.5),
+      0 0 40px hsl(var(--accent) / 0.35);
+  }
+  .shimmer {
+    background: linear-gradient(
+      110deg,
+      hsl(var(--ink)) 35%,
+      hsl(var(--accent)) 50%,
+      hsl(var(--ink)) 65%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer-slide 4s linear infinite;
+  }
+  .reveal-underline {
+    background-image: linear-gradient(hsl(var(--ink)), hsl(var(--ink)));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    transition: background-size 0.4s ease;
+    padding-bottom: 2px;
+  }
+  .reveal-underline:hover {
+    background-size: 100% 1.5px;
+  }
+  .stagger > * {
+    opacity: 0;
+    animation: fade-in 0.7s ease-out forwards;
+    animation-delay: 0.9s;
+  }
+  .stagger > *:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.25s;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.35s;
+  }
+  .stagger > *:nth-child(5) {
+    animation-delay: 0.45s;
+  }
+  .stagger > *:nth-child(6) {
+    animation-delay: 0.55s;
+  }
+  .stagger > *:nth-child(7) {
+    animation-delay: 0.65s;
+  }
+  .stagger > *:nth-child(8) {
+    animation-delay: 0.75s;
+  }
+  .stagger > *:nth-child(9) {
+    animation-delay: 0.85s;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer-slide {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px 8px hsl(var(--accent) / 0.25);
   }
 }

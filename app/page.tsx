@@ -41,11 +41,11 @@ export default function Home() {
         <div className="md:col-span-6 animate-fade-in-right">
           <div className="sketch-border p-4 rotate-[1.5deg] animate-float">
             <Image
-              src="/hero"
+              src="/hero-poster.jpg"
               alt="Featured poster"
               width={1280}
               height={896}
-              className="w-full h-auto mix-blend-screen invert"
+              className="w-full h-auto mix-blend-screen"
             />
           </div>
           <p className="hand text-2xl text-pencil text-right mt-3 pr-4">
