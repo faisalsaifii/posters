@@ -18,7 +18,7 @@ const About = () => (
             width={100}
             height={100}
             alt="The studio"
-            className="w-full h-auto mix-blend-screen invert"
+            className="w-full h-auto mix-blend-screen"
           />
         </div>
       </div>

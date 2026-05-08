@@ -1,17 +1,9 @@
-// import mountains from "@/assets/poster-mountains.jpg";
-// import botanical from "@/assets/poster-botanical.jpg";
-// import abstract from "@/assets/poster-abstract.jpg";
-// import city from "@/assets/poster-city.jpg";
-// import portrait from "@/assets/poster-portrait.jpg";
-// import ocean from "@/assets/poster-ocean.jpg";
-import { StaticImageData } from "next/image";
-
 export type Poster = {
   id: string;
   title: string;
   price: number;
   category: string;
-  image: StaticImageData | string;
+  image: string;
   description: string;
 };
 
@@ -33,7 +25,7 @@ export const posters: Poster[] = [
     title: "Quiet Summit",
     price: 18,
     category: "landscapes",
-    image: "mountains",
+    image: "/hero-poster.jpg",
     description:
       "Big mountain energy. Looks great above a desk or bed — instant calm.",
   },
@@ -42,7 +34,7 @@ export const posters: Poster[] = [
     title: "First Leaf",
     price: 14,
     category: "botanical",
-    image: "botanical",
+    image: "/hero-poster.jpg",
     description: "A simple leaf print. Easy on the eyes, easy on the wallet.",
   },
   {
@@ -50,7 +42,7 @@ export const posters: Poster[] = [
     title: "Three Moons",
     price: 20,
     category: "abstract",
-    image: "abstract",
+    image: "/hero-poster.jpg",
     description: "Three circles, lots of vibe. Weirdly satisfying to stare at.",
   },
   {
@@ -58,7 +50,7 @@ export const posters: Poster[] = [
     title: "Distant City",
     price: 22,
     category: "urban",
-    image: "city",
+    image: "/hero-poster.jpg",
     description:
       "A skyline that hits different at night. Pairs well with fairy lights.",
   },
@@ -67,7 +59,7 @@ export const posters: Poster[] = [
     title: "Looking East",
     price: 16,
     category: "portrait",
-    image: "portrait",
+    image: "/hero-poster.jpg",
     description: "Minimal one-line face print. Surprisingly chill.",
   },
   {
@@ -75,7 +67,7 @@ export const posters: Poster[] = [
     title: "Wave No. 3",
     price: 18,
     category: "landscapes",
-    image: "ocean",
+    image: "/hero-poster.jpg",
     description: "A wave mid-curl. Surf-shack vibes for any room.",
   },
 ];

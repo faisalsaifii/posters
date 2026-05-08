@@ -7,11 +7,11 @@ const PosterCard = ({ poster }: { poster: Poster }) => (
     <div className="sketch-border p-3 md:p-4 overflow-hidden">
       <div className="aspect-3/4 bg-paper-deep overflow-hidden">
         <Image
-          src={`/${poster.image}`}
+          src={poster.image}
           alt={poster.title}
           width={768}
           height={1024}
-          className="w-full h-full object-contain mix-blend-screen invert transition-all duration-700 ease-out group-hover:scale-[1.06] group-hover:rotate-1"
+          className="w-full h-full object-contain mix-blend-screen transition-all duration-700 ease-out group-hover:scale-[1.06] group-hover:rotate-1"
         />
       </div>
     </div>
