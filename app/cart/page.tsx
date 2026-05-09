@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { toast } from "sonner";
+import CheckoutModal from "@/components/CheckoutModal";
 
 export default function CartPage() {
   const { items, remove, updateQty, clear, totalItems, totalPrice } = useCart();
+  const [showCheckout, setShowCheckout] = useState(false);
 
   if (items.length === 0) {
     return (
@@ -112,7 +115,9 @@ export default function CartPage() {
         </div>
 
         <div className="flex flex-wrap gap-3 pt-4">
-          <button className="ink-btn">Checkout</button>
+          <button className="ink-btn" onClick={() => setShowCheckout(true)}>
+            Checkout
+          </button>
           <button
             className="ghost-btn"
             onClick={() => {
@@ -124,6 +129,8 @@ export default function CartPage() {
           </button>
         </div>
       </div>
+
+      {showCheckout && <CheckoutModal onClose={() => setShowCheckout(false)} />}
     </div>
   );
 }
