@@ -288,15 +288,15 @@ export default function CheckoutModal({ onClose }: CheckoutModalProps) {
           <div className="border-t border-ink/20 pt-4 space-y-2">
             <div className="flex justify-between font-sans text-xs uppercase tracking-widest text-ink-soft">
               <span>Subtotal</span>
-              <span>${totalPrice.toFixed(2)}</span>
+              <span>₹{totalPrice.toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-sans text-xs uppercase tracking-widest text-ink-soft">
               <span>Shipping</span>
-              <span>{shipping === 0 ? "Free" : "$5.00"}</span>
+              <span>{shipping === 0 ? "Free" : "₹5.00"}</span>
             </div>
             <div className="flex justify-between display text-2xl text-ink border-t border-ink/20 pt-3">
               <span>Total</span>
-              <span>${grandTotal.toFixed(2)}</span>
+              <span>₹{grandTotal.toFixed(2)}</span>
             </div>
           </div>
 
@@ -305,7 +305,7 @@ export default function CheckoutModal({ onClose }: CheckoutModalProps) {
             disabled={loading}
             className="ink-btn w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Processing…" : `Pay $${grandTotal.toFixed(2)}`}
+            {loading ? "Processing…" : `Pay ₹${grandTotal.toFixed(2)}`}
           </button>
         </form>
       </div>

@@ -58,7 +58,7 @@ export default function Home() {
         <div className="flex w-max animate-marquee gap-12 font-sans text-xs uppercase tracking-[0.3em] text-ink-soft whitespace-nowrap">
           {Array.from({ length: 2 }).map((_, i) => (
             <div key={i} className="flex gap-12 pr-12">
-              <span>↳ Free shipping over $40</span>
+              <span>↳ Free shipping over ₹250</span>
               <span>· Thick matte paper</span>
               <span>· Ships in 2 days</span>
               <span>· Multiple sizes</span>

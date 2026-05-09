@@ -65,7 +65,7 @@ const Product = ({ params }: { params: Promise<{ id: string }> }) => {
             <h1 className="display text-5xl md:text-6xl text-ink leading-tight">
               {poster.title}
             </h1>
-            <p className="font-sans text-lg mt-3 text-ink">${finalPrice}</p>
+            <p className="font-sans text-lg mt-3 text-ink">₹{finalPrice}</p>
           </div>
 
           <p className="font-sans text-base text-ink-soft leading-relaxed border-l-2 border-accent pl-5">
@@ -117,7 +117,7 @@ const Product = ({ params }: { params: Promise<{ id: string }> }) => {
           <ul className="font-sans text-xs uppercase tracking-widest text-ink-soft space-y-2 pt-6 border-t border-ink/30">
             <li>↳ Thick 200gsm matte paper</li>
             <li>↳ Ships rolled in a sturdy tube</li>
-            <li>↳ Free shipping over $40</li>
+            <li>↳ Free shipping over ₹250</li>
           </ul>
         </div>
       </div>

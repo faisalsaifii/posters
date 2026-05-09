@@ -25,7 +25,7 @@ const PosterCard = ({ poster }: { poster: Poster }) => (
         </p>
       </div>
       <p className="font-sans text-sm tracking-wider text-ink transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-accent">
-        ${poster.price}
+        ₹{poster.price}
       </p>
     </div>
   </Link>

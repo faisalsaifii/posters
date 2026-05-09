@@ -55,7 +55,7 @@ export default function CartPage() {
                   <p className="display text-2xl text-ink">{item.title}</p>
                 </div>
                 <p className="font-sans text-lg text-ink shrink-0">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ₹{(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
 
@@ -103,15 +103,15 @@ export default function CartPage() {
       <div className="mt-10 border-t border-ink/30 pt-8 space-y-4">
         <div className="flex justify-between font-sans text-base text-ink-soft">
           <span className="uppercase tracking-widest text-xs">Subtotal</span>
-          <span>${totalPrice.toFixed(2)}</span>
+          <span>₹{totalPrice.toFixed(2)}</span>
         </div>
         <div className="flex justify-between font-sans text-base text-ink-soft">
           <span className="uppercase tracking-widest text-xs">Shipping</span>
-          <span>{totalPrice >= 40 ? "Free" : "$5.00"}</span>
+          <span>{totalPrice >= 250 ? "Free" : "₹5.00"}</span>
         </div>
         <div className="flex justify-between display text-3xl text-ink border-t border-ink/30 pt-4">
           <span>Total</span>
-          <span>${(totalPrice + (totalPrice >= 40 ? 0 : 5)).toFixed(2)}</span>
+          <span>₹{(totalPrice + (totalPrice >= 250 ? 0 : 5)).toFixed(2)}</span>
         </div>
 
         <div className="flex flex-wrap gap-3 pt-4">
