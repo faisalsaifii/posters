@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useReducer, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  ReactNode,
+} from "react";
 import type { Poster } from "@/lib/posters";
 
 export type CartItem = Poster & { quantity: number };
@@ -11,10 +17,24 @@ type CartAction =
   | { type: "ADD"; item: Poster }
   | { type: "REMOVE"; id: string }
   | { type: "UPDATE_QTY"; id: string; quantity: number }
-  | { type: "CLEAR" };
+  | { type: "CLEAR" }
+  | { type: "INIT"; items: CartItem[] };
+
+const STORAGE_KEY = "cart";
+
+function loadFromStorage(): CartItem[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as CartItem[]) : [];
+  } catch {
+    return [];
+  }
+}
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
+    case "INIT":
+      return { items: action.items };
     case "ADD": {
       const existing = state.items.find((i) => i.id === action.item.id);
       if (existing) {
@@ -55,6 +75,14 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
+
+  useEffect(() => {
+    dispatch({ type: "INIT", items: loadFromStorage() });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+  }, [state.items]);
 
   const add = (item: Poster) => dispatch({ type: "ADD", item });
   const remove = (id: string) => dispatch({ type: "REMOVE", id });
